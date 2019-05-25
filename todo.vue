@@ -39,6 +39,7 @@
  
  
  */
+ import storage from './model/storage.js';
 
 export default {
   data(){
@@ -63,18 +64,18 @@ export default {
         checked:false});
 
       this.todo = '';
-       localStorage.setItem('list',JSON.stringify(this.list))//缓存
+       storage.set('list',this.list);//缓存
     },
     removeDate(key){
       this.list.splice(key,1);
-       localStorage.setItem('list',JSON.stringify(this.list))
+       storage.set('list',this.list);
     },
     saveList(){
-      localStorage.setItem('list',JSON.stringify(this.list))
+       storage.set('list',this.list);
     }
   },
   mounted(){//生命周期函数
-    var list = JSON.parse(localStorage.getItem('list'));
+    var list = storage.get('list');
     if(list){
       this.list = list; 
     }
